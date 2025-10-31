@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechParts Manufacturing — AI Transformation Failures & Best Practices</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon-automation.svg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; background: #f8f9fa; color: #1d1d1f; min-height: 100vh; }
+        .header { background: #fff; color: #1d1d1f; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e5e7eb; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .header-left h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+        .header-left p { font-size: 13px; opacity: 0.9; }
+        .nav { display: flex; gap: 12px; flex-wrap: wrap; }
+        .nav a { text-decoration: none; color: #374151; font-weight: 600; font-size: 13px; padding: 8px 10px; border-radius: 8px; transition: background 0.2s; position: relative; }
+        .nav a:hover { background: #f3f4f6; }
+        .nav a.active { color: #3b82f6; }
+        .nav a.active::after { content: ''; position: absolute; bottom: 0; left: 10px; right: 10px; height: 2px; background: #3b82f6; }
+        .main { max-width: 1400px; margin: 0 auto; padding: 24px; }
+        .hero { background: linear-gradient(135deg, #fee2e2 0%, #fef3c7 100%); border: 2px solid #ef4444; border-radius: 12px; padding: 32px; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.15); margin-bottom: 32px; }
+        .hero h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #991b1b; }
+        .hero p { font-size: 15px; color: #92400e; margin-bottom: 20px; }
+        .section-title { font-size: 22px; font-weight: 700; color: #111827; margin: 32px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb; display: flex; align-items: center; gap: 8px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #f3f4f6; }
+        .card-icon { font-size: 28px; }
+        .card h3 { font-size: 18px; font-weight: 600; margin: 0; color: #1d1d1f; }
+        .card p { font-size: 14px; color: #4b5563; margin-bottom: 12px; line-height: 1.6; }
+        .card ul { padding-left: 20px; color: #374151; font-size: 14px; }
+        .card li { margin-bottom: 8px; line-height: 1.6; }
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-bottom: 12px; }
+        .badge.danger { background: #fee2e2; color: #991b1b; }
+        .badge.warning { background: #fef3c7; color: #92400e; }
+        .badge.success { background: #d1fae5; color: #065f46; }
+        .badge.info { background: #dbeafe; color: #1e40af; }
+        .footer { max-width: 1400px; margin: 16px auto 32px; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; color: #6b7280; font-size: 12px; flex-wrap: wrap; gap: 12px; }
+        .footer .links { display: flex; flex-wrap: wrap; gap: 8px; }
+        .footer .links a { color: #6b7280; text-decoration: none; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .stat-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; text-align: center; }
+        .stat-box .num { font-size: 36px; font-weight: 700; color: #dc2626; }
+        .stat-box .lbl { font-size: 14px; color: #6b7280; margin-top: 8px; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        @media (max-width: 768px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+    </style>
+    <script>
+        function go(href) { window.location.href = href; }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <h1>AI Transformation Failures & Best Practices</h1>
+            <p>Learning from 2025's failed AI initiatives</p>
+        </div>
+        <nav class="nav">
+            <a href="./techparts-landing.html">Landing</a>
+            <a href="./techparts-owner-dashboard.html">Dashboard</a>
+            <a href="./about-rommel.html">About Rommel</a>
+            <a href="./techparts-automation.html" class="active">AI Practices</a>
+        </nav>
+    </div>
+
+    <main class="main">
+        <div class="hero">
+            <h2>⚠️ The AI Transformation Reality Check</h2>
+            <p>In 2025, enterprise AI initiatives are failing at an alarming rate. Understanding why they fail is the first step toward building successful custom software with AI tools.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="num">95%</div>
+                <div class="lbl">No measurable P&L impact<br>(MIT Study)</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">85%</div>
+                <div class="lbl">Fail due to poor data quality<br>(Gartner)</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">40%</div>
+                <div class="lbl">Agentic AI projects to be scrapped<br>(Gartner 2027 prediction)</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">$4.4B</div>
+                <div class="lbl">Financial losses from AI deployments<br>(EY 2025 Survey)</div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <span class="material-symbols-outlined">dangerous</span>
+            Notable AI Project Failures in 2025
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #dc2626;">cloud_sync</span>
+                    <h3>OpenAI's Project Stargate</h3>
+                </div>
+                <span class="badge danger">Infrastructure Failure</span>
+                <p>A $500 billion AI infrastructure initiative announced in January 2025 that faced massive delays. By mid-year, no data center deals were finalized, leading to a scaled-back focus on a smaller Ohio facility.</p>
+                <p><strong>What went wrong:</strong></p>
+                <ul>
+                    <li>Internal disagreements over site selection and energy providers</li>
+                    <li>Logistical coordination failures across multiple stakeholders</li>
+                    <li>Mismatched expectations between partners</li>
+                    <li>Bureaucratic delays and permit challenges</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #dc2626;">corporate_fare</span>
+                    <h3>Enterprise Generative AI</h3>
+                </div>
+                <span class="badge danger">Zero Business Impact</span>
+                <p>MIT study revealed that 95% of generative AI implementations in enterprises had no measurable impact on profit and loss statements.</p>
+                <p><strong>What went wrong:</strong></p>
+                <ul>
+                    <li>Flawed integration with existing workflows</li>
+                    <li>Solution-first approach instead of problem-first</li>
+                    <li>Lack of clear business objectives</li>
+                    <li>Insufficient user training and adoption</li>
+                    <li>AI tools deployed without addressing root problems</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #dc2626;">smart_toy</span>
+                    <h3>Agentic AI Projects</h3>
+                </div>
+                <span class="badge danger">Experimental Burnout</span>
+                <p>Gartner predicted over 40% of agentic AI projects will be scrapped by 2027 due to escalating costs and unclear business value.</p>
+                <p><strong>What went wrong:</strong></p>
+                <ul>
+                    <li>Hype-driven initiatives with no practical application</li>
+                    <li>Projects stuck in perpetual experimental stage</li>
+                    <li>Rising costs without demonstrable ROI</li>
+                    <li>Lack of measurable success criteria</li>
+                    <li>Technical complexity without business justification</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #dc2626;">trending_down</span>
+                    <h3>AI in Advertising</h3>
+                </div>
+                <span class="badge warning">Reputation Damage</span>
+                <p>Coca-Cola released AI-generated holiday commercials in November 2024 that received widespread negative reception and criticism from industry professionals.</p>
+                <p><strong>What went wrong:</strong></p>
+                <ul>
+                    <li>Prioritizing cost savings over quality</li>
+                    <li>Public perception of replacing human creativity</li>
+                    <li>Visible AI artifacts and lower quality output</li>
+                    <li>Backlash from creative professionals</li>
+                    <li>Damage to brand reputation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <span class="material-symbols-outlined">warning</span>
+            Common Pitfalls in AI Applications
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #ef4444;">database</span>
+                    <h3>Poor Data Quality</h3>
+                </div>
+                <span class="badge danger">42-85% Failure Rate</span>
+                <p>Poor data quality causes 42-85% of AI project failures in 2025.</p>
+                <ul>
+                    <li>Inconsistent data formats across sources</li>
+                    <li>Missing or incomplete datasets</li>
+                    <li>Biased training data leading to discriminatory outputs</li>
+                    <li>Lack of data governance standards</li>
+                    <li>Insufficient data validation and cleaning</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #f59e0b;">target</span>
+                    <h3>Misaligned Objectives</h3>
+                </div>
+                <span class="badge warning">No Clear Goals</span>
+                <p>Many AI projects lack clear goals aligned with business needs.</p>
+                <ul>
+                    <li>Solution-first thinking instead of problem-first</li>
+                    <li>Undefined success metrics and KPIs</li>
+                    <li>Disconnect between IT and business stakeholders</li>
+                    <li>Banding onto industry trends without business justification</li>
+                    <li>Unclear expectations for AI capabilities</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #f59e0b;">integration_instructions</span>
+                    <h3>Flawed Integration</h3>
+                </div>
+                <span class="badge warning">Workflow Disruption</span>
+                <p>AI tools failing to integrate with existing workflows is a primary cause of underperformance.</p>
+                <ul>
+                    <li>Forcing users into new tools instead of enhancing current ones</li>
+                    <li>Breaking established business processes</li>
+                    <li>Incompatible with legacy systems</li>
+                    <li>High switching costs and retraining needs</li>
+                    <li>Creating more work instead of reducing it</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #ef4444;">security</span>
+                    <h3>Insufficient Risk Management</h3>
+                </div>
+                <span class="badge danger">$4.4B in Losses</span>
+                <p>Companies deployed AI without proper risk assessment, leading to compliance failures and financial losses.</p>
+                <ul>
+                    <li>Legal and regulatory compliance failures</li>
+                    <li>Security vulnerabilities in AI models</li>
+                    <li>Bias and discrimination in outputs</li>
+                    <li>Data privacy breaches</li>
+                    <li>Lack of accountability frameworks</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #f59e0b;">people</span>
+                    <h3>Lack of Talent & Training</h3>
+                </div>
+                <span class="badge warning">Skills Gap</span>
+                <p>Organizations lack the necessary AI expertise and training.</p>
+                <ul>
+                    <li>Shortage of qualified AI developers</li>
+                    <li>Insufficient training for end users</li>
+                    <li>No internal knowledge transfer</li>
+                    <li>Dependency on external vendors</li>
+                    <li>Technological changes outpacing skill development</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #f59e0b;">psychology</span>
+                    <h3>AI Hallucinations & Bias</h3>
+                </div>
+                <span class="badge warning">Output Quality</span>
+                <p>Unreliable AI outputs leading to incorrect decisions and discrimination.</p>
+                <ul>
+                    <li>Confident but incorrect predictions</li>
+                    <li>Racial, gender, and socioeconomic bias</li>
+                    <li>Fabricated information in outputs</li>
+                    <li>Lack of human oversight and validation</li>
+                    <li>Over-trust in AI recommendations</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <span class="material-symbols-outlined">check_circle</span>
+            Strategies for Successful AI Transformation
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #10b981;">track_changes</span>
+                    <h3>Establish Clear Objectives</h3>
+                </div>
+                <span class="badge success">Foundation</span>
+                <p>Define specific, measurable goals aligned with business needs.</p>
+                <ul>
+                    <li>Start with the business problem, not the technology</li>
+                    <li>Define success metrics before deployment</li>
+                    <li>Align AI initiatives with company strategy</li>
+                    <li>Set realistic expectations and timelines</li>
+                    <li>Create a business case with ROI projections</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #10b981;">shield_lock</span>
+                    <h3>Ensure Data Integrity</h3>
+                </div>
+                <span class="badge success">Critical</span>
+                <p>Implement rigorous data governance practices.</p>
+                <ul>
+                    <li>Establish data quality standards and validation</li>
+                    <li>Audit datasets for bias and accuracy</li>
+                    <li>Create consistent data formats and taxonomies</li>
+                    <li>Implement data lineage tracking</li>
+                    <li>Maintain clean, labeled, and accessible datasets</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #10b981;">groups</span>
+                    <h3>Foster Cross-Functional Collaboration</h3>
+                </div>
+                <span class="badge success">Essential</span>
+                <p>Create X-FAITs (Cross-Functional AI Task Forces) to bridge gaps.</p>
+                <ul>
+                    <li>Involve business stakeholders from day one</li>
+                    <li>Bridge IT and operational teams</li>
+                    <li>Establish clear communication channels</li>
+                    <li>Create shared ownership and accountability</li>
+                    <li>Enable knowledge sharing across departments</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #10b981;">auto_fix_high</span>
+                    <h3>Prioritize Integration</h3>
+                </div>
+                <span class="badge success">User-Centric</span>
+                <p>Design AI solutions that enhance existing workflows.</p>
+                <ul>
+                    <li>Build on top of current tools and processes</li>
+                    <li>Reduce friction, don't add steps</li>
+                    <li>Ensure compatibility with legacy systems</li>
+                    <li>Minimize learning curve for users</li>
+                    <li>Provide gradual adoption paths</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #10b981;">speed</span>
+                    <h3>Adopt Iterative Development</h3>
+                </div>
+                <span class="badge success">Agile Approach</span>
+                <p>Use agile methodologies for continuous feedback.</p>
+                <ul>
+                    <li>Deliver value in small increments</li>
+                    <li>Test and refine with real users</li>
+                    <li>Embrace experimentation and pivots</li>
+                    <li>Fail fast and learn quickly</li>
+                    <li>Maintain flexibility to adapt</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #10b981;">shield_person</span>
+                    <h3>Implement Risk Management</h3>
+                </div>
+                <span class="badge success">Security</span>
+                <p>Develop comprehensive frameworks for risk assessment.</p>
+                <ul>
+                    <li>Conduct AI ethics and bias audits</li>
+                    <li>Ensure regulatory compliance (GDPR, EU AI Act)</li>
+                    <li>Implement human oversight and validation</li>
+                    <li>Create incident response protocols</li>
+                    <li>Build transparency and explainability</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #10b981;">school</span>
+                    <h3>Invest in Talent & Training</h3>
+                </div>
+                <span class="badge success">Competency</span>
+                <p>Build internal AI capabilities and skills.</p>
+                <ul>
+                    <li>Hire or train AI specialists</li>
+                    <li>Provide ongoing education and upskilling</li>
+                    <li>Create internal AI champions</li>
+                    <li>Document and share knowledge</li>
+                    <li>Reduce dependency on external vendors</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #10b981;">handshake</span>
+                    <h3>Leverage External Expertise</h3>
+                </div>
+                <span class="badge success">Partnership</span>
+                <p>Work with specialized providers when needed.</p>
+                <ul>
+                    <li>Partner with experienced AI vendors</li>
+                    <li>Get domain-specific expertise</li>
+                    <li>Learn from others' implementations</li>
+                    <li>Use proven frameworks and tools</li>
+                    <li>Balance build vs. buy decisions</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <span class="material-symbols-outlined">code</span>
+            Best Practices for Custom AI Software Development in 2025
+        </div>
+        <div class="two-col">
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #3b82f6;">play_arrow</span>
+                    <h3>Start with MVP</h3>
+                </div>
+                <p>Build a minimal viable product first.</p>
+                <ul>
+                    <li>Deploy working functionality within one week</li>
+                    <li>Prove value before scaling</li>
+                    <li>Get user feedback early and often</li>
+                    <li>Avoid over-engineering from day one</li>
+                    <li>Build incrementally with agile sprints</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #3b82f6;">map</span>
+                    <h3>Map Existing Workflows</h3>
+                </div>
+                <p>Understand current processes before automating.</p>
+                <ul>
+                    <li>Walk through actual business processes</li>
+                    <li>Identify bottlenecks and pain points</li>
+                    <li>Preserve what works well</li>
+                    <li>Design solutions for real problems</li>
+                    <li>Ensure AI enhances, not replaces, workflows</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #3b82f6;">people</span>
+                    <h3>Engage Stakeholders Early</h3>
+                </div>
+                <p>Involve users from the beginning.</p>
+                <ul>
+                    <li>Include end users in requirements gathering</li>
+                    <li>Show demos and prototypes frequently</li>
+                    <li>Gather feedback during development</li>
+                    <li>Address concerns before deployment</li>
+                    <li>Build buy-in and adoption</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #3b82f6;">monitoring</span>
+                    <h3>Monitor & Evaluate Continuously</h3>
+                </div>
+                <p>Regular assessment of AI system performance.</p>
+                <ul>
+                    <li>Track key metrics and KPIs</li>
+                    <li>Detect bias and drift over time</li>
+                    <li>Monitor user adoption and satisfaction</li>
+                    <li>Identify issues early</li>
+                    <li>Iterate based on real-world performance</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #3b82f6;">cloud_sync</span>
+                    <h3>Local-First Architecture</h3>
+                </div>
+                <p>Build systems you own and control.</p>
+                <ul>
+                    <li>Deploy on-premise or in your cloud</li>
+                    <li>Own your data and models</li>
+                    <li>Avoid vendor lock-in</li>
+                    <li>Ensure privacy and security</li>
+                    <li>Scale to cloud when ready</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined card-icon" style="color: #3b82f6;">verified_user</span>
+                    <h3>Human-in-the-Loop</h3>
+                </div>
+                <p>Always maintain human oversight.</p>
+                <ul>
+                    <li>AI suggests, humans decide</li>
+                    <li>Provide override capabilities</li>
+                    <li>Validate critical decisions manually</li>
+                    <li>Explain AI recommendations</li>
+                    <li>Build trust through transparency</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 32px; border: 2px solid #3b82f6; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);">
+            <div class="card-header">
+                <span class="material-symbols-outlined card-icon" style="color: #3b82f6;">rocket_launch</span>
+                <h3>Ready to Build AI Software Right?</h3>
+            </div>
+            <p style="font-size: 16px; margin-bottom: 16px;">Avoid the 95% failure rate. Work with VSOL to build custom AI software the right way—starting with your actual problems, using real data, and deploying a working MVP in one week.</p>
+            <p style="font-size: 14px; color: #4b5563; margin-bottom: 20px;">No templates. No guesswork. No vendor lock-in. Just your process, built exactly how you need it.</p>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <button class="btn primary" onclick="window.open('https://calendly.com/vsol/meeting-with-bandeira', '_blank')" style="padding: 14px 20px; font-size: 14px;">
+                    <span class="material-symbols-outlined">event</span> Schedule Meeting
+                </button>
+                <button class="btn" onclick="go('./mvp-workflow-tracker.html')" style="padding: 14px 20px; font-size: 14px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none;">
+                    <span class="material-symbols-outlined">checklist</span> 5-Day Journey
+                </button>
+                <button class="btn" onclick="go('./techparts-landing.html')" style="padding: 14px 20px; font-size: 14px;">
+                    <span class="material-symbols-outlined">home</span> Back to Landing
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div class="footer">
+        <div class="links">
+            <a href="./techparts-landing.html">Landing</a>
+            <a href="./techparts-owner-dashboard.html">Dashboard</a>
+            <a href="./about-rommel.html">About Rommel</a>
+            <a href="./techparts-automation.html">Automation</a>
+            <a href="./ai-transformation-failures.html">AI Practices</a>
+        </div>
+        <div>© TechParts (demo) • MVP Mockups</div>
+    </div>
+</body>
+</html>
+

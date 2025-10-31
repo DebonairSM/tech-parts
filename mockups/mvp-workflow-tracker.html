@@ -400,6 +400,151 @@
                 margin: -8px 0;
             }
         }
+
+        /* Opportunity Matrix Styles */
+        .quadrant.drag-over {
+            border-width: 3px !important;
+            background: rgba(59, 130, 246, 0.1) !important;
+        }
+
+        .opportunity-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .opportunity-item[draggable="true"] {
+            transition: all 0.2s;
+        }
+
+        /* Toast Notification Styles */
+        .toast-container {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 400px;
+        }
+
+        .toast {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-left: 4px solid #2563eb;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: toastSlideIn 0.3s ease-out;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .toast.success {
+            border-left-color: #10b981;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+        }
+
+        .toast.info {
+            border-left-color: #2563eb;
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+        }
+
+        .toast.warning {
+            border-left-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+        }
+
+        .toast.celebration {
+            border-left-color: #8b5cf6;
+            background: linear-gradient(135deg, #faf5ff 0%, #ffffff 100%);
+        }
+
+        .toast-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: #111827;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
+        .toast-message {
+            font-size: 13px;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: color 0.2s;
+        }
+
+        .toast-close:hover {
+            color: #4b5563;
+        }
+
+        @keyframes toastSlideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes toastSlideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .toast.removing {
+            animation: toastSlideOut 0.3s ease-in forwards;
+        }
+
+        @media (max-width: 768px) {
+            .toast-container {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                max-width: none;
+            }
+
+            .toast {
+                min-width: auto;
+                max-width: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -596,14 +741,128 @@ Team Member: We spend too much time manually entering data from Excel sheets int
                 </div>
             </div>
 
+            <!-- Opportunity Matrix Panel -->
+            <div class="content-panel" style="margin-bottom: 24px;">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span style="margin-right: 8px;">📊</span>
+                        Opportunity Matrix — Prioritize What to Work On First
+                    </div>
+                    <span class="status-badge status-pending">Your Picks</span>
+                </div>
+                <p style="color: #4b5563; margin-bottom: 20px; line-height: 1.6;">
+                    As part of our problem-driven solution methodology, we use the Opportunity Matrix to narrow down from many problems to what to work on first. This helps us prioritize which workflows to improve, what to automate, and what to apply AI strategy to first.
+                </p>
+                
+                <div style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 12px; padding: 24px; margin-bottom: 20px;">
+                    <div style="display: grid; grid-template-columns: 80px 1fr; gap: 16px; min-height: 550px;">
+                        <!-- Y-Axis Labels Column -->
+                        <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 16px 0;">
+                            <div style="writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); font-weight: 700; font-size: 16px; color: #111827; text-align: center;">HIGH IMPACT</div>
+                            <div style="writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); font-weight: 700; font-size: 16px; color: #111827; text-align: center;">LOW IMPACT</div>
+                        </div>
+                        
+                        <!-- Matrix Grid -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; min-height: 500px;">
+                            <!-- Quadrant 1: High Impact, Low Effort (Quick Wins) -->
+                            <div class="quadrant" data-quadrant="quick-wins" style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border: 2px solid #10b981; border-radius: 8px; padding: 16px; position: relative; cursor: pointer; transition: all 0.2s;" onmouseover="highlightQuadrant('quick-wins')" onmouseout="unhighlightQuadrant()">
+                                <div style="font-weight: 700; font-size: 14px; color: #065f46; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Quick Wins</div>
+                                <div class="quadrant-content" style="font-size: 13px; color: #047857;">
+                                    <div class="opportunity-item" data-effort="low" data-impact="high" draggable="true" style="background: white; border: 1px solid #10b981; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: move;">
+                                        <div style="font-weight: 600; margin-bottom: 4px;">Automate packing verification</div>
+                                        <div style="font-size: 11px; color: #6b7280;">Low effort, saves 4h/day</div>
+                                    </div>
+                                    <div class="opportunity-item" data-effort="low" data-impact="high" draggable="true" style="background: white; border: 1px solid #10b981; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: move;">
+                                        <div style="font-weight: 600; margin-bottom: 4px;">Email QC failure alerts</div>
+                                        <div style="font-size: 11px; color: #6b7280;">Low effort, instant response</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quadrant 2: High Impact, High Effort (Strategic Projects) -->
+                            <div class="quadrant" data-quadrant="strategic" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border: 2px solid #3b82f6; border-radius: 8px; padding: 16px; position: relative; cursor: pointer; transition: all 0.2s;" onmouseover="highlightQuadrant('strategic')" onmouseout="unhighlightQuadrant()">
+                                <div style="font-weight: 700; font-size: 14px; color: #1e40af; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Strategic Projects</div>
+                                <div class="quadrant-content" style="font-size: 13px; color: #1e3a8a;">
+                                    <div class="opportunity-item" data-effort="high" data-impact="high" draggable="true" style="background: white; border: 1px solid #3b82f6; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: move;">
+                                        <div style="font-weight: 600; margin-bottom: 4px;">Complete digital workflow migration</div>
+                                        <div style="font-size: 11px; color: #6b7280;">High effort, transforms operations</div>
+                                    </div>
+                                    <div class="opportunity-item" data-effort="high" data-impact="high" draggable="true" style="background: white; border: 1px solid #3b82f6; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: move;">
+                                        <div style="font-weight: 600; margin-bottom: 4px;">AI-powered predictive maintenance</div>
+                                        <div style="font-size: 11px; color: #6b7280;">High effort, major efficiency gain</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quadrant 3: Low Impact, Low Effort (Fill-Ins) -->
+                            <div class="quadrant" data-quadrant="fill-in" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 8px; padding: 16px; position: relative; cursor: pointer; transition: all 0.2s;" onmouseover="highlightQuadrant('fill-in')" onmouseout="unhighlightQuadrant()">
+                                <div style="font-weight: 700; font-size: 14px; color: #92400e; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Fill-Ins</div>
+                                <div class="quadrant-content" style="font-size: 13px; color: #78350f;">
+                                    <div class="opportunity-item" data-effort="low" data-impact="low" draggable="true" style="background: white; border: 1px solid #f59e0b; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: move;">
+                                        <div style="font-weight: 600; margin-bottom: 4px;">UI color scheme update</div>
+                                        <div style="font-size: 11px; color: #6b7280;">Low effort, minor improvement</div>
+                                    </div>
+                                    <div class="opportunity-item" data-effort="low" data-impact="low" draggable="true" style="background: white; border: 1px solid #f59e0b; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: move;">
+                                        <div style="font-weight: 600; margin-bottom: 4px;">Report formatting tweaks</div>
+                                        <div style="font-size: 11px; color: #6b7280;">Low effort, nice to have</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quadrant 4: Low Impact, High Effort (Money Pits) -->
+                            <div class="quadrant" data-quadrant="money-pit" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 2px solid #ef4444; border-radius: 8px; padding: 16px; position: relative; cursor: pointer; transition: all 0.2s;" onmouseover="highlightQuadrant('money-pit')" onmouseout="unhighlightQuadrant()">
+                                <div style="font-weight: 700; font-size: 14px; color: #991b1b; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Money Pits</div>
+                                <div class="quadrant-content" style="font-size: 13px; color: #7f1d1d;">
+                                    <div class="opportunity-item" data-effort="high" data-impact="low" draggable="true" style="background: white; border: 1px solid #ef4444; border-radius: 6px; padding: 10px; margin-bottom: 8px; cursor: move; opacity: 0.6;">
+                                        <div style="font-weight: 600; margin-bottom: 4px;">Complete system rewrite</div>
+                                        <div style="font-size: 11px; color: #6b7280;">High effort, minimal benefit</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- X-Axis Labels -->
+                    <div style="display: grid; grid-template-columns: 80px 1fr; gap: 16px; margin-top: 12px;">
+                        <div></div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <div style="text-align: center; font-weight: 700; font-size: 16px; color: #111827;">LOW EFFORT</div>
+                            <div style="text-align: center; font-weight: 700; font-size: 16px; color: #111827;">HIGH EFFORT</div>
+                        </div>
+                    </div>
+                    
+                    <!-- How to Use Section -->
+                    <div style="margin-top: 24px; padding: 16px; background: white; border: 1px solid #e5e7eb; border-radius: 8px;">
+                        <div style="font-weight: 600; font-size: 14px; color: #111827; margin-bottom: 12px;">How to Use This Matrix:</div>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 8px; font-size: 13px; color: #4b5563;">
+                                <span style="color: #10b981; font-weight: 700; margin-right: 8px;">✓</span>
+                                <strong>Quick Wins</strong> (High Impact, Low Effort): Prioritize these first — automation opportunities, simple workflow improvements
+                            </li>
+                            <li style="margin-bottom: 8px; font-size: 13px; color: #4b5563;">
+                                <span style="color: #3b82f6; font-weight: 700; margin-right: 8px;">✓</span>
+                                <strong>Strategic Projects</strong> (High Impact, High Effort): Major initiatives worth investing in — AI implementations, system transformations
+                            </li>
+                            <li style="margin-bottom: 8px; font-size: 13px; color: #4b5563;">
+                                <span style="color: #f59e0b; font-weight: 700; margin-right: 8px;">!</span>
+                                <strong>Fill-Ins</strong> (Low Impact, Low Effort): Do these when you have spare time — minor tweaks, cosmetic improvements
+                            </li>
+                            <li style="margin-bottom: 0; font-size: 13px; color: #4b5563;">
+                                <span style="color: #ef4444; font-weight: 700; margin-right: 8px;">✗</span>
+                                <strong>Money Pits</strong> (Low Impact, High Effort): Avoid these — high effort with little return on investment
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <div class="content-panel">
                 <div class="panel-header">
                     <div class="panel-title">Review Requirements</div>
                     <span class="status-badge status-pending">Pending</span>
                 </div>
                 <p style="color: #4b5563; margin-bottom: 20px;">
-                    Review the extracted requirements and provide feedback. You can revise workflows, 
-                    prioritize features, and select which items to include in your MVP.
+                    Review the extracted requirements and provide feedback. Use the Opportunity Matrix above to prioritize which workflows to improve, what to automate, and what to apply AI strategy to first. You can revise workflows, prioritize features, and select which items to include in your MVP.
                 </p>
                 <div class="actions">
                     <button class="button button-success" onclick="completeDay2()">
@@ -708,8 +967,103 @@ Team Member: We spend too much time manually entering data from Excel sheets int
                     </button>
                 </div>
             </div>
+
+            <div class="content-panel" style="border-left: 4px solid #2563eb; background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span style="margin-right: 8px;">🗺️</span>
+                        Final Report: Your Strategic Roadmap
+                    </div>
+                    <span class="status-badge status-complete">Deliverable</span>
+                </div>
+                <p style="color: #4b5563; margin-bottom: 20px; line-height: 1.6;">
+                    <strong>The final report is a strategic roadmap.</strong> This comprehensive document provides a clear path forward, outlining:
+                </p>
+                <ul class="requirements-list" style="margin-top: 20px;">
+                    <li class="requirement-item">
+                        <div class="requirement-title">Long-term Vision & Goals</div>
+                        <div class="requirement-description">Strategic objectives and desired outcomes for your organization's digital transformation journey.</div>
+                    </li>
+                    <li class="requirement-item">
+                        <div class="requirement-title">Priority Initiatives</div>
+                        <div class="requirement-description">Prioritized list of projects and initiatives based on impact, effort, and business value.</div>
+                    </li>
+                    <li class="requirement-item">
+                        <div class="requirement-title">Implementation Timeline</div>
+                        <div class="requirement-description">Phased approach showing when to execute each initiative, with milestones and dependencies.</div>
+                    </li>
+                    <li class="requirement-item">
+                        <div class="requirement-title">Resource Planning</div>
+                        <div class="requirement-description">Recommended allocation of resources, budget considerations, and team requirements.</div>
+                    </li>
+                    <li class="requirement-item">
+                        <div class="requirement-title">Success Metrics</div>
+                        <div class="requirement-description">Key performance indicators and measurement criteria to track progress and ROI.</div>
+                    </li>
+                </ul>
+                <p style="color: #4b5563; margin-top: 20px; padding: 16px; background: white; border-radius: 8px; border: 1px solid #dbeafe;">
+                    <strong>Your strategic roadmap</strong> transforms the insights from your MVP journey into an actionable plan for continued growth and optimization of your systems and workflows.
+                </p>
+            </div>
         </div>
     </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script>
+        // Toast Notification System
+        function showToast(message, type = 'info', title = null) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+
+            const icons = {
+                success: '✓',
+                info: 'ℹ',
+                warning: '⚠',
+                celebration: '🎉'
+            };
+
+            const defaultTitles = {
+                success: 'Great progress!',
+                info: 'Just so you know',
+                warning: 'Almost there',
+                celebration: 'Congratulations!'
+            };
+
+            const icon = icons[type] || icons.info;
+            const toastTitle = title || defaultTitles[type] || defaultTitles.info;
+
+            toast.innerHTML = `
+                <div class="toast-icon">${icon}</div>
+                <div class="toast-content">
+                    <div class="toast-title">${toastTitle}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close" onclick="removeToast(this)">×</button>
+            `;
+
+            container.appendChild(toast);
+
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                removeToast(toast.querySelector('.toast-close'));
+            }, 5000);
+        }
+
+        function removeToast(button) {
+            const toast = button.closest('.toast');
+            if (toast) {
+                toast.classList.add('removing');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }
+        }
+    </script>
 
     <script>
         const sampleRequirements = [
@@ -811,7 +1165,7 @@ Team Member: We spend too much time manually entering data from Excel sheets int
             const status = document.getElementById('day1-status');
 
             if (!input.value.trim()) {
-                alert('Please enter or upload a transcript first.');
+                showToast('Add your interview transcript to get started. Paste it in the text area above or upload a file.', 'warning', 'Transcript needed');
                 return;
             }
 
@@ -886,7 +1240,7 @@ Team Member: We spend too much time manually entering data from Excel sheets int
             checkTask('day1-2');
             checkTask('day1-3');
             document.getElementById('day-2-section').classList.remove('hidden');
-            alert('Day 1 complete! Day 2 is now available.');
+            showToast('You\'ve completed the interview and requirements phase. Time to review and prioritize what matters most.', 'success', 'Day 1 complete!');
         }
 
         function completeDay2() {
@@ -894,7 +1248,7 @@ Team Member: We spend too much time manually entering data from Excel sheets int
             checkTask('day2-2');
             checkTask('day2-3');
             document.getElementById('day-3-4-section').classList.remove('hidden');
-            alert('Day 2 complete! Development begins.');
+            showToast('Your priorities are set and requirements are finalized. We\'re starting development now.', 'success', 'Day 2 complete!');
         }
 
         function completeDay3() {
@@ -902,7 +1256,7 @@ Team Member: We spend too much time manually entering data from Excel sheets int
             checkTask('day3-2');
             checkTask('day3-3');
             document.getElementById('day-5-section').classList.remove('hidden');
-            alert('Development complete! Ready for demo.');
+            showToast('Your MVP is built and ready for a walkthrough. We\'ll demo everything so you can see it in action.', 'success', 'Development complete!');
         }
 
         function completeDay5() {
@@ -910,19 +1264,118 @@ Team Member: We spend too much time manually entering data from Excel sheets int
             checkTask('day5 notebook');
             checkTask('day5-3');
             document.getElementById('launch-section').classList.remove('hidden');
-            alert('Demo complete! Ready to launch.');
+            showToast('Demo completed and feedback collected. Your MVP is polished and ready to go live whenever you are.', 'success', 'Demo complete!');
         }
 
         function completeLaunch() {
             checkTask('launch-1');
             checkTask('launch-2');
             checkTask('launch-3');
-            alert('🎉 Congratulations! Your MVP has launched successfully!');
+            showToast('From contact to launch in 5 days — your MVP is now live and ready to transform your workflows. Here\'s to building something great together!', 'celebration', 'Congratulations! Launch successful');
+        }
+
+        // Opportunity Matrix Functions
+        function highlightQuadrant(quadrantId) {
+            const quadrant = document.querySelector(`[data-quadrant="${quadrantId}"]`);
+            if (quadrant) {
+                quadrant.style.transform = 'scale(1.02)';
+                quadrant.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.15)';
+            }
+        }
+
+        function unhighlightQuadrant() {
+            const quadrants = document.querySelectorAll('.quadrant');
+            quadrants.forEach(q => {
+                q.style.transform = 'scale(1)';
+                q.style.boxShadow = 'none';
+            });
+        }
+
+        // Initialize drag and drop for opportunity items
+        function initOpportunityMatrix() {
+            const items = document.querySelectorAll('.opportunity-item');
+            items.forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragend', handleDragEnd);
+            });
+
+            const quadrants = document.querySelectorAll('.quadrant');
+            quadrants.forEach(quadrant => {
+                quadrant.addEventListener('dragover', handleDragOver);
+                quadrant.addEventListener('drop', handleDrop);
+                quadrant.addEventListener('dragenter', handleDragEnter);
+                quadrant.addEventListener('dragleave', handleDragLeave);
+            });
+        }
+
+        let draggedElement = null;
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.style.opacity = '0.5';
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            this.style.opacity = '1';
+            const quadrants = document.querySelectorAll('.quadrant');
+            quadrants.forEach(q => {
+                q.classList.remove('drag-over');
+            });
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            this.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+
+            if (draggedElement !== this) {
+                const quadrantContent = this.querySelector('.quadrant-content');
+                if (quadrantContent && draggedElement) {
+                    quadrantContent.appendChild(draggedElement);
+                    
+                    // Update data attributes based on new quadrant
+                    const quadrant = this.getAttribute('data-quadrant');
+                    if (quadrant === 'quick-wins') {
+                        draggedElement.setAttribute('data-effort', 'low');
+                        draggedElement.setAttribute('data-impact', 'high');
+                    } else if (quadrant === 'strategic') {
+                        draggedElement.setAttribute('data-effort', 'high');
+                        draggedElement.setAttribute('data-impact', 'high');
+                    } else if (quadrant === 'fill-in') {
+                        draggedElement.setAttribute('data-effort', 'low');
+                        draggedElement.setAttribute('data-impact', 'low');
+                    } else if (quadrant === 'money-pit') {
+                        draggedElement.setAttribute('data-effort', 'high');
+                        draggedElement.setAttribute('data-impact', 'low');
+                    }
+                }
+            }
+
+            this.classList.remove('drag-over');
+            return false;
         }
 
         // Initialize on page load
         window.addEventListener('load', function() {
             initCheckboxes();
+            initOpportunityMatrix();
         });
     </script>
 </body>
