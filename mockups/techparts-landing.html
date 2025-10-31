@@ -21,7 +21,7 @@
         .hero { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px; }
         .hero h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #111827; }
         .hero p { font-size: 15px; color: #4b5563; margin-bottom: 20px; }
-        .hero-ctas { display: flex; gap: 8px; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+        .hero-ctas { display: flex; gap: 8px; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; padding-top: 4px; }
         .hero-ctas::-webkit-scrollbar { height: 4px; }
         .hero-ctas::-webkit-scrollbar-track { background: transparent; }
         .hero-ctas::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 2px; }
@@ -297,13 +297,6 @@
             </div>
             
             <div class="card">
-                <h3><span class="material-symbols-outlined" style="font-size:18px;">extension</span> Optional Extensions</h3>
-                <p style="font-size:14px; color:#4b5563; margin:0;">
-                    CMMS (maintenance scheduling & downtime tracking), Production Scheduling (capacity planning & Gantt charts), Mobile/Tablet UI for shop floor and warehouse operations
-                </p>
-            </div>
-            
-            <div class="card">
                 <h3><span class="material-symbols-outlined" style="font-size:18px;">rocket_launch</span> 1 Week • 1 MVP • Zero Risk</h3>
                 <p style="font-size:14px; color:#4b5563; margin-bottom:16px;">If it doesn't fit like a glove, you don't pay. No templates. No guesswork. Just your process, built exactly how you need it.</p>
                 <button class="btn primary" onclick="window.open('https://calendly.com/vsol/meeting-with-bandeira', '_blank')" style="width:100%; display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:8px;">
@@ -315,6 +308,37 @@
                 <button class="btn ai-gradient" onclick="go('./techparts-automation.html')" style="width:100%; display:flex; align-items:center; justify-content:center; gap:8px;">
                     <span class="material-symbols-outlined">qr_code</span> View Automation
                 </button>
+            </div>
+            
+            <div class="card">
+                <h3><span class="material-symbols-outlined" style="font-size:18px;">extension</span> Optional Extensions</h3>
+                <p style="font-size:14px; color:#4b5563; margin-bottom:16px;">Add these modules when your operations require deeper functionality.</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="padding: 12px; background: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                            <span class="material-symbols-outlined" style="font-size:18px; color:#3b82f6;">build</span>
+                            <h4 style="font-size: 14px; font-weight: 600; color: #111827; margin: 0;">CMMS</h4>
+                        </div>
+                        <p style="font-size: 13px; color: #4b5563; margin: 0;">Maintenance scheduling, preventive maintenance workflows, downtime tracking, and equipment history logs integrated with MES.</p>
+                    </div>
+                    
+                    <div style="padding: 12px; background: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                            <span class="material-symbols-outlined" style="font-size:18px; color:#3b82f6;">calendar_month</span>
+                            <h4 style="font-size: 14px; font-weight: 600; color: #111827; margin: 0;">Production Scheduling</h4>
+                        </div>
+                        <p style="font-size: 13px; color: #4b5563; margin: 0;">Capacity planning, resource allocation, Gantt charts, and bottleneck identification to optimize shop floor throughput.</p>
+                    </div>
+                    
+                    <div style="padding: 12px; background: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                            <span class="material-symbols-outlined" style="font-size:18px; color:#3b82f6;">phone_android</span>
+                            <h4 style="font-size: 14px; font-weight: 600; color: #111827; margin: 0;">Mobile & Tablet UI</h4>
+                        </div>
+                        <p style="font-size: 13px; color: #4b5563; margin: 0;">Touch-optimized interfaces for shop floor operators, warehouse pickers, and quality inspectors. Works offline.</p>
+                    </div>
+                </div>
             </div>
         </aside>
     </main>

@@ -63,3 +63,9 @@ choco install ngrok
 
 Option 2 - Download from [ngrok.com](https://ngrok.com/download) and add to PATH
 
+## Documentation
+
+- [Setup Guide](SETUP.md) - Detailed setup instructions
+- [Troubleshooting Guide](TROUBLESHOOTING.md) - Common issues and solutions, including ERR_NGROK_3200 errors
+- [Quick Start](QUICKSTART.txt) - Fast reference guide
+
