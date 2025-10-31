@@ -1,0 +1,81 @@
+================================================================================
+TECHPARTS MOCKUPS - READY FOR NGROK PUBLIC URL
+================================================================================
+
+CURRENT STATUS: ✓ Server running at http://localhost:8000
+
+NEXT STEP: Install and run ngrok to get public URL
+
+================================================================================
+QUICK START
+================================================================================
+
+1. INSTALL NGROK (if needed):
+   choco install ngrok
+
+2. START NGROK TUNNEL:
+   start_ngrok.bat
+   
+   OR manually:
+   ngrok http 8000
+
+3. GET YOUR PUBLIC URL:
+   ngrok will show: Forwarding: https://abc123-xyz.ngrok-free.app -> localhost:8000
+
+4. SHARE YOUR LANDING PAGE:
+   https://your-ngrok-url/techparts-landing.html
+
+================================================================================
+AVAILABLE FILES
+================================================================================
+
+STARTUP:
+- start_server.bat    - Start the local server
+- start_ngrok.bat     - Start ngrok tunnel
+- server.py           - Python HTTP server (port 8000)
+
+DOCUMENTATION:
+- README.md           - General documentation
+- SETUP.md            - Detailed setup instructions
+- QUICKSTART.txt      - This file
+
+MOCKUPS (in mockups/ directory):
+- techparts-landing.html         - Main landing page (START HERE)
+- techparts-owner-dashboard.html
+- techparts-crm.html
+- techparts-erp.html
+- techparts-hris.html
+- techparts-oms.html
+- techparts-qms.html
+- techparts-mes.html
+- techparts-wms.html
+- techparts-automation.html
+- mvp-workflow-tracker.html
+- vsol-onepager.html
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Server not working?
+- Run: python server.py (check for errors)
+- Check port 8000 is free: netstat -an | findstr :8000
+
+ngrok not found?
+- Install: choco install ngrok
+- Or download from: https://ngrok.com/download
+
+Need a different port?
+- Edit server.py, change: PORT = 8000
+- Then run ngrok with the new port
+
+================================================================================
+IMPORTANT
+================================================================================
+
+✓ Keep BOTH terminals open (server + ngrok)
+✓ Free ngrok URLs change each restart
+✓ For persistent URLs, sign up at ngrok.com and configure authtoken
+
+================================================================================
+
