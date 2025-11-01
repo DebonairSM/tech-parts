@@ -13,528 +13,658 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-            color: #1d1d1f;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #1a1a2e;
             background: #fff;
-            line-height: 1.5;
+            line-height: 1.4;
+            font-size: 10px;
         }
 
         @page {
             size: Letter;
-            margin: 0.5in;
+            margin: 0.35in;
         }
 
         @media print {
             body {
-                background: #fff;
-                font-size: 13px;
-            }
-            
-            a[href]:after {
-                content: none;
+                font-size: 8pt;
             }
 
-            .container {
-                max-width: 7.5in;
+            .page-front {
+                page-break-after: always;
+            }
+
+            .page-back {
+                page-break-before: always;
             }
 
             .header {
-                margin-bottom: 0.2in;
-                padding: 16px !important;
+                padding: 8px 0 !important;
+                margin-bottom: 0.08in !important;
             }
 
-            .owner-intro {
-                margin-bottom: 0.2in;
-                padding: 16px;
+            .logo-container {
+                margin-bottom: 0.08in !important;
+                padding: 10px 0 !important;
             }
 
-            .owner-intro .intro-text {
-                font-size: 13px;
-                margin-bottom: 8px;
+            .owner-section {
+                padding: 8px !important;
+                margin-bottom: 0.08in !important;
             }
 
-            div[style*="grid-template-columns: repeat(5"] {
-                grid-template-columns: repeat(5, 1fr) !important;
-                gap: 6px !important;
+            .owner-text {
+                font-size: 8pt !important;
+                margin-bottom: 6px !important;
             }
 
-            div[style*="Your Amazing Journey"] {
-                margin-bottom: 0.15in !important;
-                padding: 14px !important;
+            .cta-box {
+                padding: 8px !important;
+                margin: 0.08in 0 !important;
             }
 
-            .card {
-                break-inside: avoid;
-                page-break-inside: avoid;
-                padding: 12px;
+            .journey-section {
+                padding: 8px !important;
+                margin-bottom: 0.08in !important;
             }
 
-            .card h3 {
-                font-size: 15px;
+            .day-box {
+                padding: 4px !important;
+                font-size: 7pt !important;
             }
 
-            .card li {
-                font-size: 12px;
-                margin-bottom: 4px;
+            .features-section {
+                margin-top: 0.08in !important;
             }
 
-            .section-title {
-                break-after: avoid;
-                page-break-after: avoid;
-                margin: 0.15in 0 0.15in 0;
-                font-size: 16px;
+            .feature-card {
+                padding: 6px !important;
+                font-size: 7pt !important;
             }
 
-            .grid-2x2, .grid-3col {
-                gap: 10px;
-                margin-bottom: 0.2in;
+            .section-header {
+                font-size: 9pt !important;
+                margin: 0.08in 0 0.06in 0 !important;
             }
 
-            .footer {
-                margin-top: 0.2in;
-                padding-top: 0.15in;
+            .qr-section {
+                padding: 10px !important;
+                margin-bottom: 0.08in !important;
+            }
+
+            .qr-container {
+                width: 90px !important;
+                height: 90px !important;
+                margin: 0 auto 6px !important;
             }
         }
 
         .container {
-            max-width: 7.3in;
+            max-width: 7.5in;
             margin: 0 auto;
-            padding: 0.3in 0;
+            padding: 0;
+        }
+
+        /* FRONT PAGE */
+        .page-front {
+            min-height: 10in;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.1in;
+            padding: 10px 0;
+        }
+
+        .logo {
+            display: inline-block;
+            position: relative;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: #1e3a8a;
+        }
+
+        .logo-squares {
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-square-yellow {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #fbbf24;
+            top: -6px;
+            right: 18px;
+        }
+
+        .logo-square-blue {
+            position: absolute;
+            width: 9px;
+            height: 9px;
+            background: #1e3a8a;
+            top: -4px;
+            right: 3px;
         }
 
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-            margin-bottom: 0.3in;
-            padding-bottom: 0.25in;
-            border-bottom: 3px solid #2563eb;
-            background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
-            padding: 20px 16px;
-            border-radius: 0;
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 2px solid #1e3a8a;
+            margin-bottom: 0.1in;
         }
 
-        .header-left {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .header-left h1 {
-            font-size: 24px;
+        .header h1 {
+            font-size: 18px;
             font-weight: 700;
-            color: #111827;
-            margin-bottom: 8px;
+            color: #1e3a8a;
+            margin-bottom: 6px;
             line-height: 1.2;
         }
 
-        .header-left .promise {
-            font-size: 13px;
-            color: #4b5563;
+        .header .tagline {
+            font-size: 11px;
+            color: #475569;
             font-weight: 500;
-            line-height: 1.5;
         }
 
-        .owner-intro {
-            margin-bottom: 0.3in;
-            padding: 20px;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-left: 4px solid #2563eb;
-            border-radius: 8px;
-        }
-
-        .owner-intro .intro-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1e40af;
-            margin-bottom: 12px;
-        }
-
-        .owner-intro .intro-text {
-            font-size: 14px;
-            color: #1e3a8a;
-            line-height: 1.7;
-            margin-bottom: 10px;
-        }
-
-        .owner-intro .intro-signature {
-            font-size: 14px;
-            color: #1e40af;
-            font-weight: 600;
-            text-align: right;
-            margin-top: 8px;
-        }
-
-        .header-right {
-            text-align: right;
-            border: 2px solid #2563eb;
-            border-radius: 12px;
-            padding: 14px;
-            background: linear-gradient(135deg, #eff6ff 0%, #f9fafb 100%);
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
-            flex-shrink: 0;
-            width: 140px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .qr-section {
+            text-align: center;
+            padding: 12px;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            margin-bottom: 0.1in;
         }
 
         .qr-container {
-            width: 110px;
-            height: 110px;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 8px;
             background: #fff;
             padding: 6px;
-            border: 1px solid #bfdbfe;
-            margin-bottom: 8px;
+            border: 2px solid #1e3a8a;
         }
 
-        .qr-container canvas {
+        .qr-container img {
+            width: 100%;
+            height: 100%;
             display: block;
         }
 
-        .qr-caption {
+        .qr-text {
             font-size: 10px;
-            color: #6b7280;
-            max-width: 108px;
-            text-align: center;
-        }
-
-        .tagline {
-            font-size: 11px;
-            color: #2563eb;
-            font-weight: 600;
-            margin-top: 8px;
-            white-space: nowrap;
-            text-align: center;
-        }
-
-        .kpi-strip {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 0.35in;
-        }
-
-        .kpi-tile {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .kpi-label {
-            font-size: 11px;
-            color: #6b7280;
+            color: #1e3a8a;
             font-weight: 600;
             margin-bottom: 4px;
         }
 
-        .kpi-value {
-            font-size: 18px;
-            color: #2563eb;
+        .qr-subtext {
+            font-size: 12px;
+            color: #1e3a8a;
             font-weight: 700;
         }
 
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #111827;
-            margin: 0.25in 0 0.2in 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #2563eb;
+        .owner-section {
+            background: #eff6ff;
+            border-left: 3px solid #1e3a8a;
+            padding: 12px;
+            margin-bottom: 0.1in;
         }
 
-        .section-subtitle {
+        .owner-title {
             font-size: 13px;
-            color: #6b7280;
-            font-weight: 400;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 8px;
         }
 
-        .grid-2x2 {
+        .owner-text {
+            font-size: 10px;
+            color: #1e3a8a;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .owner-text strong {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .owner-signature {
+            text-align: right;
+            font-size: 10px;
+            color: #1e3a8a;
+            font-weight: 600;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
+            border: 2px solid #10b981;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+            margin: 0.1in 0;
+        }
+
+        .cta-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #065f46;
+            margin-bottom: 6px;
+        }
+
+        .cta-text {
+            font-size: 10px;
+            color: #047857;
+            line-height: 1.4;
+        }
+
+        /* BACK PAGE */
+        .page-back {
+            min-height: 10in;
+        }
+
+        .journey-section {
+            background: #eff6ff;
+            border: 1px solid #1e3a8a;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 0.1in;
+        }
+
+        .journey-title {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+
+        .day-box {
+            background: #fff;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 6px;
+            text-align: center;
+        }
+
+        .day-box.launch {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .day-number {
+            font-size: 10px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 4px;
+        }
+
+        .day-box.launch .day-number {
+            color: #10b981;
+        }
+
+        .day-desc {
+            font-size: 8px;
+            color: #475569;
+            line-height: 1.3;
+        }
+
+        .highlights-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 0.1in;
+        }
+
+        .highlight-box {
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .highlight-box.kpi {
+            background: #eff6ff;
+            border-left: 3px solid #1e3a8a;
+        }
+
+        .highlight-box.data {
+            background: #f0fdf4;
+            border-left: 3px solid #10b981;
+        }
+
+        .highlight-title {
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .highlight-box.kpi .highlight-title {
+            color: #1e3a8a;
+        }
+
+        .highlight-box.data .highlight-title {
+            color: #065f46;
+        }
+
+        .highlight-content {
+            font-size: 8px;
+            line-height: 1.4;
+        }
+
+        .highlight-box.kpi .highlight-content {
+            color: #475569;
+        }
+
+        .highlight-box.data .highlight-content {
+            color: #047857;
+        }
+
+        .section-header {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1e3a8a;
+            border-bottom: 1px solid #1e3a8a;
+            padding-bottom: 4px;
+            margin: 0.1in 0 0.08in 0;
+        }
+
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            margin-bottom: 0.3in;
+            gap: 8px;
+            margin-bottom: 0.1in;
         }
 
-        .grid-3col {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-            margin-bottom: 0.3in;
+        .feature-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 8px;
         }
 
-        .card {
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 16px;
+        .feature-card h3 {
+            font-size: 10px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 4px;
         }
 
-        .card h3 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 10px;
-        }
-
-        .card ul {
+        .feature-card ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .card li {
-            font-size: 13px;
-            color: #374151;
-            margin-bottom: 6px;
-            padding-left: 16px;
+        .feature-card li {
+            font-size: 8px;
+            color: #475569;
+            margin-bottom: 2px;
+            padding-left: 10px;
             position: relative;
+            line-height: 1.3;
         }
 
-        .card li:before {
-            content: "•";
+        .feature-card li:before {
+            content: "▸";
             position: absolute;
             left: 0;
-            color: #2563eb;
-            font-weight: bold;
+            color: #1e3a8a;
+            font-size: 8px;
         }
 
-        .footer {
-            margin-top: 0.4in;
-            padding-top: 0.25in;
-            border-top: 1px solid #e5e7eb;
-            font-size: 12px;
-            color: #6b7280;
+        .footer-back {
             text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid #cbd5e1;
+            margin-top: 0.1in;
         }
 
-        .footer strong {
-            color: #111827;
-            font-weight: 600;
+        .footer-back p {
+            font-size: 9px;
+            color: #475569;
+            margin-bottom: 3px;
         }
 
-        .footer a {
-            color: #2563eb;
-            text-decoration: none;
+        .footer-back .contact {
+            font-weight: 700;
+            color: #1e3a8a;
         }
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive adjustments for smaller screens */
         @media screen and (max-width: 600px) {
-            .grid-2x2,
-            .grid-3col {
+            .timeline {
                 grid-template-columns: 1fr;
             }
 
-            .kpi-strip {
-                grid-template-columns: repeat(2, 1fr);
+            .features-grid {
+                grid-template-columns: 1fr;
             }
 
-            .header {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .header-right {
-                margin-top: 16px;
+            .highlights-bar {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <div class="header-left">
-                <h1>VSol Software — Manufacturing Admin Suite</h1>
-                <div class="promise">Tailor-built, never template-bound. Local-first, private, and MVP in one week.</div>
+        <!-- FRONT PAGE -->
+        <div class="page-front">
+            <div class="logo-container">
+                <div class="logo">
+                    <span class="logo-squares">
+                        <div class="logo-square-yellow"></div>
+                        <div class="logo-square-blue"></div>
+                    </span>
+                    VSOL
+                </div>
             </div>
-            <div class="header-right">
+
+            <div class="header">
+                <h1>Manufacturing Admin Suite</h1>
+                <div class="tagline">Tailor-built, never template-bound. Local-first, private, and MVP in one week.</div>
+            </div>
+
+            <div class="qr-section">
                 <div class="qr-container">
                     <canvas id="qr-canvas" style="display:none;"></canvas>
-                    <img src="./adobe-express-qr-code.png" alt="QR Code" style="width:100px; height:100px; display:block;">
+                    <img src="./adobe-express-qr-code.png" alt="QR Code">
                 </div>
-                <div class="qr-caption">Scan to Start Your MVP Journey</div>
-                <div class="tagline">1 Week • 1 MVP • Zero Risk</div>
+                <div class="qr-text">Scan to Start Your MVP Journey</div>
+                <div class="qr-subtext">1 Week • 1 MVP • Zero Risk</div>
             </div>
-        </div>
 
-        <div class="owner-intro">
-            <div class="intro-title">From the Owner: Rommel</div>
-            <div class="intro-text">
-                After building hundreds of business applications over the past 20 years, I've seen the same frustration again and again: companies trapped by complex processes and expensive off-the-shelf software that never quite fits.
+            <div class="owner-section">
+                <div class="owner-title">From the Owner: Rommel</div>
+                <div class="owner-text">
+                    After building hundreds of business applications over the past 20 years, I've seen the same frustration: companies trapped by complex processes and expensive off-the-shelf software that never quite fits.
+                </div>
+                <div class="owner-text">
+                    That frustration ends now.
+                </div>
+                <div class="owner-text">
+                    AI has changed everything—it lets me design systems that mirror the way your business actually works. No rigid templates. No waste. Just technology that flows with your operations and reveals insights you've never seen before.
+                </div>
+                <div class="owner-text">
+                    <strong>Your dream system—the one built entirely around how you work—is finally possible. It's your process, made smarter.</strong>
+                </div>
+                <div class="owner-text">
+                    What can I—and AI—build for you?
+                </div>
+                <div class="owner-signature">— Rommel, Owner & Builder</div>
             </div>
-            <div class="intro-text">
-                That frustration ends now.
-            </div>
-            <div class="intro-text">
-                AI has changed everything—it finally lets me design systems that mirror the way your business actually works. No rigid templates. No waste. Just technology that flows with your operations and reveals insights you've never been able to see before.
-            </div>
-            <div class="intro-text">
-                <strong>Your dream system—the one built entirely around how you work—is finally possible. It's your process, made smarter.</strong>
-            </div>
-            <div class="intro-text">
-                What can I—and AI—build for you?
-            </div>
-            <div class="intro-text" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #bfdbfe;">
-                <strong>Your existing data will be seamlessly imported—no retyping required.</strong> Whether it's in spreadsheets, databases, PDFs, Word documents, or existing SaaS systems, we migrate it all.
-            </div>
-            <div class="intro-signature">— Rommel, Owner & Builder</div>
-        </div>
 
-        <div style="margin-bottom: 0.25in; padding: 18px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; border-radius: 10px; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);">
-            <div style="font-size: 14px; color: #1e40af; font-weight: 700; margin-bottom: 12px; text-align: center;">Your Amazing Journey: From Contact to MVP in 5 Days</div>
-            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 10px;">
-                <div style="text-align: center; padding: 10px; background: white; border-radius: 6px; border: 1px solid #bfdbfe;">
-                    <div style="font-size: 16px; font-weight: 700; color: #2563eb; margin-bottom: 4px;">Day 1</div>
-                    <div style="font-size: 11px; color: #1e3a8a;">Interview your team<br/>AI organizes transcripts<br/>into requirements</div>
-                </div>
-                <div style="text-align: center; padding: 10px; background: white; border-radius: 6px; border: 1px solid #bfdbfe;">
-                    <div style="font-size: 16px; font-weight: 700; color: #2563eb; margin-bottom: 4px;">Day 2</div>
-                    <div style="font-size: 11px; color: #1e3a8a;">You Revise<br/>Workflow & features<br/>Your picks</div>
-                </div>
-                <div style="text-align: center; padding: 10px; background: white; border-radius: 6px; border: 1px solid #bfdbfe;">
-                    <div style="font-size: 16px; font-weight: 700; color: #2563eb; margin-bottom: 4px;">Day 3-4</div>
-                    <div style="font-size: 11px; color: #1e3a8a;">We Create<br/>Your MVP app<br/>Built to spec</div>
-                </div>
-                <div style="text-align: center; padding: 10px; background: white; border-radius: 6px; border: 1px solid #bfdbfe;">
-                    <div style="font-size: 16px; font-weight: 700; color: #2563eb; margin-bottom: 4px;">Day 5</div>
-                    <div style="font-size: 11px; color: #1e3a8a;">Demo & Approval<br/>Live walkthrough<br/>Your feedback</div>
-                </div>
-                <div style="text-align: center; padding: 10px; background: white; border-radius: 6px; border: 1px solid #bfdbfe;">
-                    <div style="font-size: 16px; font-weight: 700; color: #10b981; margin-bottom: 4px;">→ Launch</div>
-                    <div style="font-size: 10px; color: #059669; margin-top: -2px; margin-bottom: 4px;">Schedule the launch</div>
-                    <div style="font-size: 11px; color: #1e3a8a;">Your system<br/>goes live<br/>zero risk</div>
+            <div class="cta-box">
+                <div class="cta-title">Zero Data Re-entry Required</div>
+                <div class="cta-text">
+                    Your existing data—no matter where it lives—will be seamlessly migrated into your new system. We import from spreadsheets, databases, PDFs, Word documents, and existing SaaS platforms. No retyping. No data loss. Just a smooth transition.
                 </div>
             </div>
         </div>
 
-        <div style="margin-bottom: 0.25in; padding: 12px; background: linear-gradient(90deg, #eff6ff 0%, #f9fafb 50%, #eff6ff 100%); border-left: 4px solid #2563eb; border-radius: 6px;">
-            <div style="font-size: 13px; color: #1e40af; font-weight: 600; margin-bottom: 4px;">Custom KPIs Available</div>
-            <div style="font-size: 11px; color: #4b5563;">OEE • FPY • On-Time % • Margin • Asset Utilization • Scrap Rate • DPMO</div>
-        </div>
+        <!-- BACK PAGE -->
+        <div class="page-back">
+            <div class="journey-section">
+                <div class="journey-title">From Contact to MVP in 5 Days</div>
+                <div class="timeline">
+                    <div class="day-box">
+                        <div class="day-number">Day 1</div>
+                        <div class="day-desc">Interview your team<br>AI organizes transcripts into requirements</div>
+                    </div>
+                    <div class="day-box">
+                        <div class="day-number">Day 2</div>
+                        <div class="day-desc">You Revise<br>Workflow & features<br>Your picks</div>
+                    </div>
+                    <div class="day-box">
+                        <div class="day-number">Day 3-4</div>
+                        <div class="day-desc">We Create<br>Your MVP app<br>Built to spec</div>
+                    </div>
+                    <div class="day-box">
+                        <div class="day-number">Day 5</div>
+                        <div class="day-desc">Demo & Approval<br>Live walkthrough<br>Your feedback</div>
+                    </div>
+                    <div class="day-box launch">
+                        <div class="day-number">→ Launch</div>
+                        <div class="day-desc">Schedule the launch<br>Your system goes live<br>Zero risk</div>
+                    </div>
+                </div>
+            </div>
 
-        <div style="margin-bottom: 0.25in; padding: 16px; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid #10b981; border-radius: 8px; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);">
-            <div style="font-size: 14px; color: #059669; font-weight: 700; margin-bottom: 8px;">Zero Data Re-entry Required</div>
-            <div style="font-size: 12px; color: #065f46; line-height: 1.6;">
-                Your existing data—no matter where it lives—will be seamlessly migrated into your new system. We import from spreadsheets, databases, PDFs, Word documents, and existing SaaS platforms. No retyping. No data loss. Just a smooth transition.
+            <div class="highlights-bar">
+                <div class="highlight-box kpi">
+                    <div class="highlight-title">Custom KPIs Available</div>
+                    <div class="highlight-content">OEE • FPY • On-Time % • Margin • Asset Utilization • Scrap Rate • DPMO</div>
+                </div>
+                <div class="highlight-box data">
+                    <div class="highlight-title">AI-Driven Insights</div>
+                    <div class="highlight-content">Bottleneck detection • Predictive alerts • Weekly highlights • Custom dashboards</div>
+                </div>
             </div>
-        </div>
 
-        <div class="section-title">Core Business Systems <span class="section-subtitle">— Lead to Cash</span></div>
-        <div class="grid-2x2">
-            <div class="card">
-                <h3>CRM</h3>
-                <ul>
-                    <li>Smart contacts with custom fields</li>
-                    <li>Pipeline boards in your language</li>
-                    <li>Email/call history per account</li>
-                </ul>
+            <div class="section-header">Core Business Systems</div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>CRM</h3>
+                    <ul>
+                        <li>Smart contacts with custom fields</li>
+                        <li>Pipeline boards in your language</li>
+                        <li>Email/call history per account</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>ERP</h3>
+                    <ul>
+                        <li>Invoices, time & tasks, streamlined inventory</li>
+                        <li>QuickBooks export or API integration</li>
+                        <li>Purchasing approvals and PO tracking</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>OMS</h3>
+                    <ul>
+                        <li>Quotes → orders → fulfillment → delivery</li>
+                        <li>Customer confirmations and status</li>
+                        <li>Carrier tracking hooks</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Automation & AI</h3>
+                    <ul>
+                        <li>Bottleneck insights and weekly highlights</li>
+                        <li>Feature requests flow to build board</li>
+                        <li>Local AI + optional lead scraper</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card">
-                <h3>ERP</h3>
-                <ul>
-                    <li>Invoices, time & tasks, streamlined inventory</li>
-                    <li>QuickBooks export or API integration</li>
-                    <li>Purchasing approvals and PO tracking</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>OMS</h3>
-                <ul>
-                    <li>Quotes → orders → fulfillment → delivery</li>
-                    <li>Customer confirmations and status</li>
-                    <li>Carrier tracking hooks</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>Automation & AI</h3>
-                <ul>
-                    <li>Bottleneck insights and weekly highlights</li>
-                    <li>Feature requests flow to build board</li>
-                    <li>Local AI + optional lead scraper</li>
-                </ul>
-            </div>
-        </div>
 
-        <div class="section-title">Manufacturing & Quality <span class="section-subtitle">— Material to Finished Goods</span></div>
-        <div class="grid-2x2">
-            <div class="card">
-                <h3>MES</h3>
-                <ul>
-                    <li>Live work orders, operators, throughput</li>
-                    <li>Kiosk mode</li>
-                    <li>IoT-ready machine status</li>
-                    <li>Capacity & simple scheduling</li>
-                </ul>
+            <div class="section-header">Manufacturing & Quality</div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>MES</h3>
+                    <ul>
+                        <li>Live work orders, operators, throughput</li>
+                        <li>Kiosk mode</li>
+                        <li>IoT-ready machine status</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>QMS</h3>
+                    <ul>
+                        <li>Non-conformance, CAPA, audits</li>
+                        <li>Digital checklists</li>
+                        <li>Lot traceability</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>WMS</h3>
+                    <ul>
+                        <li>Bins, barcodes, pick/pack/ship</li>
+                        <li>Receiving & dispatch flows</li>
+                        <li>Cycle counts and stock alerts</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>SCM</h3>
+                    <ul>
+                        <li>Supplier ratings and on-time metrics</li>
+                        <li>POs synced to ERP</li>
+                        <li>Shipment tracking & compliance</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card">
-                <h3>QMS</h3>
-                <ul>
-                    <li>Non-conformance, CAPA, audits</li>
-                    <li>Digital checklists</li>
-                    <li>Lot traceability</li>
-                    <li>Controlled document vault</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>WMS</h3>
-                <ul>
-                    <li>Bins, barcodes, pick/pack/ship</li>
-                    <li>Receiving & dispatch flows</li>
-                    <li>Cycle counts and stock alerts</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>SCM</h3>
-                <ul>
-                    <li>Supplier ratings and on-time metrics</li>
-                    <li>POs synced to ERP</li>
-                    <li>Shipment tracking & compliance</li>
-                </ul>
-            </div>
-        </div>
 
-        <div class="section-title">Product & People Systems <span class="section-subtitle">— Knowledge & Continuous Improvement</span></div>
-        <div class="grid-3col">
-            <div class="card">
-                <h3>PLM</h3>
-                <ul>
-                    <li>BOM & drawing revisions</li>
-                    <li>ECR/ECO</li>
-                    <li>Links to QMS/MES for end-to-end traceability</li>
-                </ul>
+            <div class="section-header">Product & People Systems</div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>PLM</h3>
+                    <ul>
+                        <li>BOM & drawing revisions</li>
+                        <li>ECR/ECO workflow</li>
+                        <li>Links to QMS/MES for traceability</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>HR & Training / EHS</h3>
+                    <ul>
+                        <li>Skill matrices, certifications</li>
+                        <li>Safety checklists, incident logging</li>
+                        <li>Audit readiness</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Customer Portal</h3>
+                    <ul>
+                        <li>B2B self-service for orders/quotes</li>
+                        <li>Real-time order status tracking</li>
+                        <li>Document access and downloads</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Analytics</h3>
+                    <ul>
+                        <li>BI across CRM/ERP/OMS/MES/QMS</li>
+                        <li>Anomaly alerts and custom reports</li>
+                        <li>Performance dashboards</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card">
-                <h3>HR & Training / EHS</h3>
-                <ul>
-                    <li>Skill matrices, certifications</li>
-                    <li>Safety checklists, incident logging</li>
-                    <li>Audit readiness</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>Customer Portal & Analytics</h3>
-                <ul>
-                    <li>B2B self-service for orders/quotes</li>
-                    <li>BI across CRM/ERP/OMS/MES/QMS</li>
-                    <li>Anomaly alerts and custom reports</li>
-                </ul>
-            </div>
-        </div>
 
-        <div class="footer">
-            <div style="margin-bottom: 8px;">
-                <strong>Your process, built exactly how you need it.</strong>
-            </div>
-            <div style="font-size: 13px;">
-                One week to MVP. One call to start. Scan QR code above to schedule.
+            <div class="footer-back">
+                <p><span class="contact">Your process, built exactly how you need it.</span></p>
+                <p>One week to MVP. One call to start. Scan QR code to schedule.</p>
             </div>
         </div>
     </div>

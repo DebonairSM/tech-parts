@@ -15,11 +15,21 @@ from pathlib import Path
 
 # Configuration
 PORT = 8000
+HOST = "0.0.0.0"  # Listen on all interfaces to support custom hostnames like tech-parts.home
 DIRECTORY = "mockups"
 
 class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
+    
+    def do_GET(self):
+        # Redirect root to default landing page
+        if self.path == '/':
+            self.send_response(302)
+            self.send_header('Location', '/techparts-landing.html')
+            self.end_headers()
+            return
+        return super().do_GET()
     
     def end_headers(self):
         # Add CORS headers for ngrok
@@ -114,11 +124,12 @@ def main():
     
     # Create server
     try:
-        with socketserver.TCPServer(("", PORT), MyHTTPRequestHandler) as httpd:
+        with socketserver.TCPServer((HOST, PORT), MyHTTPRequestHandler) as httpd:
             print(f"\n{'='*60}")
             print(f"TechParts Mockups Server")
             print(f"{'='*60}")
-            print(f"Server running at: http://localhost:{PORT}")
+            print(f"Server running at: http://{HOST}:{PORT}")
+            print(f"Default page: http://{HOST}:{PORT}/techparts-landing.html")
             print(f"Serving directory: {DIRECTORY}/")
             print(f"\nTo expose publicly with ngrok:")
             print(f"  ngrok http {PORT}")
